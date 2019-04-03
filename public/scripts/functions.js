@@ -10,7 +10,6 @@ function createStudent(studentID, studentName, idPhoto, typedShirtSize) {
 }
 
 function submit() {
-	// example: createStudent(068643, "Student Name", "", "L");
 	var nameInput = document.getElementById("nameInput").value;
 	var shirtInput = document.getElementById("shirtInput").value;
 	var ticketInput = document.getElementById("ticketInput").value;
