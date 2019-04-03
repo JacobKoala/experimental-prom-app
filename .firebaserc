@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "experimental-prom-app",
+    "experimental-prom-app": "experimental-prom-app"
+  }
+}
