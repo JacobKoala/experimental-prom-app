@@ -15,7 +15,7 @@ function submit() {
 	var nameInput = document.getElementById("nameInput").value;
 	var shirtInput = document.getElementById("shirtInput").value;
 	var ticketInput = document.getElementById("ticketInput").value;
-	createStudent(000000, nameInput, "", shirtInput, ticketInput);
+	createStudent(000000, nameInput, 0, shirtInput, parseInt(ticketInput, 10));
 	document.getElementById("nameInput").value = "";
 	document.getElementById("shirtInput").value = "";
 	document.getElementById("ticketInput").value = "";
