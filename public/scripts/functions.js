@@ -12,7 +12,7 @@ function createStudent(studentID, studentName, idPhoto, typedShirtSize, ticketNu
 }
 
 function getStudentByTicket(ticketNumber) {
-	db.collection("students").where("ticketNumber", "==", ticketNumber)
+	firebase.firestore().collection("students").where("ticketNumber", "==", ticketNumber)
     .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
