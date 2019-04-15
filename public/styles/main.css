@@ -16,15 +16,10 @@ html {
   background-color: rgb(190, 190, 200);
 }
 .pencil {
-  width: 37.8%;
-  margin-top: 5%;
-  margin-left: 5%;
+  max-height: auto;
+  max-width: 200px;
 }
-.sketch1 {
-  width:13%;
-  margin-left:-22.5%;
-  margin-top:10%;
-}
+
 .wall {
   background-color: rgb(215,215,225);
   border-style: solid;
@@ -37,10 +32,16 @@ html {
   padding-left: 1%;
 }
 .heart {
-  width: 31%;
+  max-height: auto;
+  max-width: 200px;
 }
 h2 {
   font-size: 35px;
   color: maroon;
   font-family: "Bubblegum Sans";
+}
+
+.database {
+  max-height: auto;
+  max-width: 200px;
 }
