@@ -11,6 +11,20 @@ function createStudent(studentID, studentName, idPhoto, typedShirtSize, ticketNu
 	});
 }
 
+function getStudentByTicket(ticketNumber) {
+	db.collection("students").where("ticketNumber", "==", ticketNumber)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+
 function submit() {
 	var nameInput = document.getElementById("nameInput").value;
 	var shirtInput = document.getElementById("shirtInput").value;
@@ -19,4 +33,9 @@ function submit() {
 	document.getElementById("nameInput").value = "";
 	document.getElementById("shirtInput").value = "";
 	document.getElementById("ticketInput").value = "";
+}
+
+function retriveStudent() {
+	var input = document.getElementById("ticketInput").value;
+	getStudentByTicket(input);
 }
