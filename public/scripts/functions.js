@@ -18,8 +18,8 @@ function getStudentByTicket(ticketNumber) {
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-						document.getElementById("databaseOutput").innerHTML = doc.data();
-						window.alert(doc.data());
+						document.getElementById("databaseOutput").innerHTML = doc.data().name;
+						window.alert(doc.data().name);
         });
     })
     .catch(function(error) {
