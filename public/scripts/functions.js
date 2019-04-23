@@ -46,4 +46,5 @@ function submit() {
 function retrieveStudent() {
 	var input = document.getElementById("ticketInput").value;
 	getStudentByTicket(parseInt(input));
+	document.getElementById("ticketInput").value = "";
 }
