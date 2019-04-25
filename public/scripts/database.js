@@ -55,6 +55,12 @@ function noShirt() {
   });
 }
 
+function retrieveStudent() {
+	var input = document.getElementById("ticketInput").value;
+	getStudentByTicket(parseInt(input));
+	document.getElementById("ticketInput").value = "";
+}
+
 window.onload = function() {
   document.getElementById('ticketInput').onkeydown = function(event) {
       var keyPressed = event.keyCode;
