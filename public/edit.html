@@ -45,6 +45,14 @@
     <option value="Extra Large">Extra Large</option>
   </select>
 
+  <h2>Photo</h2>
+  <input type="file" accept="image/*" id="file-input">
+  <script>
+    const fileInput = document.getElementById('file-input');
+
+    fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
+  </script>
+  
   <h2>Ticket Number</h2>
 
     <input type="text" id="ticketInput"><br>
