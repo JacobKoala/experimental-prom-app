@@ -7,6 +7,7 @@ function getStudentByTicket(ticketNumber) {
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             currentStudent = doc;
+						affectedStudent = firebase.firestore().collection("students").doc(currentStudent.id)
             console.log(doc.id, " => ", doc.data());
 						document.getElementById("ticketNumber").innerHTML = doc.data().ticketNumber;
 						document.getElementById("firstName").innerHTML = doc.data().firstName;
@@ -27,8 +28,6 @@ function getStudentByTicket(ticketNumber) {
 }
 
 function yesShirt() {
-  var affectedStudent = firebase.firestore().collection("students").doc(currentStudent.id);
-
   return affectedStudent.update({
     shirtCollected: true
   })
@@ -43,7 +42,17 @@ function yesShirt() {
 }
 
 function noShirt() {
-
+  return affectedStudent.update({
+    shirtCollected: false
+  })
+  .then(function() {
+    document.getElementById("noButton").style.backgroundColor = "blue";
+    document.getElementById("yesButton").style.backgroundColor = "white";
+    console.log("Document successfully updated!")
+  })
+  .catch(function(error) {
+    console.error("Error updating document: ", error);
+  });
 }
 
 window.onload = function() {
