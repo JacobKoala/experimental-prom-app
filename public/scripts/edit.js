@@ -26,8 +26,8 @@ function submit() {
 	document.getElementById("ticketInput").value = "";
 }
 
-function doSomethingWithFiles() {
-  console.log(fileInput);
+function doSomethingWithFiles(file) {
+  console.log(file);
 }
 
 window.onload = function() {
