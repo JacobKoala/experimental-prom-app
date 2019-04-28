@@ -9,6 +9,11 @@ function createStudent(studentID, firstName, lastName, idPhoto, typedShirtSize, 
 		shirtSize: typedShirtSize,
 		shirtCollected: false,
 		timestamp: Date.now()
+	}).then(function() {
+		document.getElementById("firstInput").value = "";
+		document.getElementById("lastInput").value = "";
+		document.getElementById("shirtInput").value = "";
+		document.getElementById("ticketInput").value = "";
 	}).catch(function(error) {
 		console.error('Error when adding student', error)
 	});
@@ -20,10 +25,6 @@ function submit() {
 	var shirtInput = document.getElementById("shirtInput").value;
 	var ticketInput = document.getElementById("ticketInput").value;
 	createStudent(000000, firstInput, lastInput, 0, shirtInput, parseInt(ticketInput, 10));
-	document.getElementById("firstInput").value = "";
-	document.getElementById("lastInput").value = "";
-	document.getElementById("shirtInput").value = "";
-	document.getElementById("ticketInput").value = "";
 }
 
 function doSomethingWithFiles(file) {

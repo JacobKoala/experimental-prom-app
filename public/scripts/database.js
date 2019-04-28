@@ -4,6 +4,7 @@ function getStudentByTicket(ticketNumber) {
 	firebase.firestore().collection("students").where("ticketNumber", "==", ticketNumber)
     .get()
     .then(function(querySnapshot) {
+				document.getElementById("ticketInput").value = "";
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             currentStudent = doc;
@@ -58,7 +59,6 @@ function noShirt() {
 function retrieveStudent() {
 	var input = document.getElementById("ticketInput").value;
 	getStudentByTicket(parseInt(input));
-	document.getElementById("ticketInput").value = "";
 }
 
 window.onload = function() {
