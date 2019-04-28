@@ -68,5 +68,6 @@ node_modules/
 Programs/fart.exe
 Programs/FART-Find-and-Replace-Text.html
 
-# Firestore rules
+# rules
 firestore.rules
+storage.rules
