@@ -1,7 +1,4 @@
 window.onload = function() {
-  console.log(firebase);
-  console.log(firebase.auth);
-  console.log(firebase.auth.GoogleAuthProvider());
   var provider = new firebase.auth.GoogleAuthProvider();
 
   firebase.auth().signInWithRedirect(provider);
