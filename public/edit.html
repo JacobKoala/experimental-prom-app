@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bubblegum+Sans" />
 
-
+<link rel="stylesheet" type="text/css" href="styles/capture.css">
 <link rel="stylesheet" type="text/css" href="styles/edit.css"> <!-- link to CSS -->
 
 
@@ -30,15 +30,18 @@
   </select>
 
   <h2>Photo</h2>
-  <input type="file" accept="image/*" id="file-input">
-  script>
-    const fileInput = document.getElementById('file-input');
-    console.log(fileInput);
-    fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
-  </script>
-  <video id="video" width="640" height="480" autoplay></video>
-  <button id="snap">Snap Photo</button>
-  <canvas id="canvas" width="640" height="480"></canvas>
+  <!-- <input type="file" accept="image/*" id="file-input"> -->
+  <div class="contentarea">
+  <div class="camera">
+    <video id="video">Video stream not available.</video>
+    <button id="startbutton">Take photo</button>
+  </div>
+  <canvas id="canvas">
+  </canvas>
+  <div class="output">
+    <img id="photo" alt="The screen capture will appear in this box.">
+  </div>
+  </div>
 
 
   <h2>Ticket Number</h2>
@@ -61,6 +64,7 @@
 
   <script src="scripts/authentication.js"></script>
   <script src="scripts/storage.js"></script>
+  <script src="scripts/capture.js"></script>
   <script src="scripts/edit.js"></script>
 
 </body>
