@@ -1,3 +1,6 @@
+var currentStudentId = "";
+var currentStudentTicketNumber = 0;
+
 // This adds a new student to the database.
 function createStudent(studentID, firstName, lastName, idPhoto, typedShirtSize, ticketNumber) {
 	return firebase.firestore().collection('students').add({
@@ -10,6 +13,8 @@ function createStudent(studentID, firstName, lastName, idPhoto, typedShirtSize, 
 		shirtCollected: false,
 		timestamp: Date.now()
 	}).then(function() {
+		currentStudentTicketNumber = document.getElementById("ticketInput").value;
+		saveImage();
 		document.getElementById("firstInput").value = "";
 		document.getElementById("lastInput").value = "";
 		document.getElementById("shirtInput").value = "";
@@ -29,6 +34,23 @@ function submit() {
 
 function doSomethingWithFiles(file) {
   console.log(file);
+}
+
+function saveImage() {
+	firebase.firestore().collection("students").where("ticketNumber", "==", currentStudentTicketNumber)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+						currentStudentId = doc.id;
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+	var studentRef = storageRef.child(currentStudentId + ".jpg");
+	var uploadTask = studentRef.put(fileInput);
 }
 
 window.onload = function() {

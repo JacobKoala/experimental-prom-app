@@ -31,7 +31,7 @@
 
   <h2>Photo</h2>
   <input type="file" accept="image/*" id="file-input">
-  <script>
+  script>
     const fileInput = document.getElementById('file-input');
     console.log(fileInput);
     fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
@@ -60,6 +60,7 @@
   <script src="/__/firebase/init.js"></script>
 
   <script src="scripts/authentication.js"></script>
+  <script src="scripts/storage.js"></script>
   <script src="scripts/edit.js"></script>
 
 </body>
