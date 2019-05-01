@@ -54,6 +54,7 @@ function saveImage() {
 					var uploadTask = studentRef.putString(file, 'data_url').then(function(snapshot) {
 						console.log('Uploaded a data_url string!');
 						clearphoto();
+						photoExists = false;
 						document.getElementById("firstInput").value = "";
 						document.getElementById("lastInput").value = "";
 						document.getElementById("shirtInput").value = "";
