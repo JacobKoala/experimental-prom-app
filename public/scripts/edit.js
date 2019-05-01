@@ -15,10 +15,6 @@ function createStudent(studentID, firstName, lastName, idPhoto, typedShirtSize, 
 	}).then(function() {
 		currentStudentTicketNumber = document.getElementById("ticketInput").value;
 		saveImage();
-		document.getElementById("firstInput").value = "";
-		document.getElementById("lastInput").value = "";
-		document.getElementById("shirtInput").value = "";
-		document.getElementById("ticketInput").value = "";
 	}).catch(function(error) {
 		console.error('Error when adding student', error)
 	});
@@ -29,7 +25,11 @@ function submit() {
 	var lastInput = document.getElementById("lastInput").value;
 	var shirtInput = document.getElementById("shirtInput").value;
 	var ticketInput = document.getElementById("ticketInput").value;
-	createStudent(000000, firstInput, lastInput, 0, shirtInput, parseInt(ticketInput, 10));
+	if (firstInput == "" || lastInput == "" || shirtInput == "" || ticketInput == "") {
+		alert("Some fields are blank!");
+	} else {
+		createStudent(000000, firstInput, lastInput, 0, shirtInput, parseInt(ticketInput, 10));
+	}
 }
 
 function doSomethingWithFiles(file) {
@@ -50,14 +50,26 @@ function saveImage() {
 				var studentRef = storageRef.child(currentStudentTicketNumber + ".jpg");
 				var file = document.getElementById('photo').src;
 				console.log(file);
-				var uploadTask = studentRef.putString(file, 'data_url').then(function(snapshot) {
-					console.log('Uploaded a data_url string!');
-					document.getElementById('photo').src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAEaUlEQVR4Xu3UAQkAMAwDwdW/k5rcYC4ergrCpWR29x5HgACBgMAYrEBLIhIg8AUMlkcgQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjr+8DkBQk1VgAAAABJRU5ErkJggg==";
-				});
+				if (photoExists) {
+					var uploadTask = studentRef.putString(file, 'data_url').then(function(snapshot) {
+						console.log('Uploaded a data_url string!');
+						clearphoto();
+						document.getElementById("firstInput").value = "";
+						document.getElementById("lastInput").value = "";
+						document.getElementById("shirtInput").value = "";
+						document.getElementById("ticketInput").value = "";
+					});
+				} else {
+					alert("The photo is missing!");
+				}
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
+}
+
+function manualImageChange() {
+	console.log(document.getElementById('file-input').files[0]);
 }
 
 window.onload = function() {

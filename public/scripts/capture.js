@@ -1,3 +1,15 @@
+var photoExists = false;
+
+// I copied this function from the below area to give it global scope.
+function clearphoto() {
+  var context = canvas.getContext('2d');
+  context.fillStyle = "#AAA";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  var data = canvas.toDataURL('image/png');
+  document.getElementById('photo').setAttribute('src', data);
+}
+
 // from https://github.com/mdn/samples-server/blob/master/s/webrtc-capturestill/capture.js
 (function() {
   // The width and height of the captured photo. We will set the
@@ -21,6 +33,7 @@
   var startbutton = null;
 
   function startup() {
+    photoExists = false;
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
@@ -83,6 +96,7 @@
   function takepicture() {
     var context = canvas.getContext('2d');
     if (width && height) {
+      photoExists = true;
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
