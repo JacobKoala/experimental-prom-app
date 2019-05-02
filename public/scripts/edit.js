@@ -1,5 +1,6 @@
 var currentStudentId = "";
 var currentStudentTicketNumber = 0;
+var reader = new FileReader();
 
 // This adds a new student to the database.
 function createStudent(studentID, firstName, lastName, idPhoto, typedShirtSize, ticketNumber) {
@@ -59,6 +60,7 @@ function saveImage() {
 						document.getElementById("lastInput").value = "";
 						document.getElementById("shirtInput").value = "";
 						document.getElementById("ticketInput").value = "";
+						document.getElementById("file-input").value = "";
 					});
 				} else {
 					alert("The photo is missing!");
@@ -70,7 +72,7 @@ function saveImage() {
 }
 
 function manualImageChange() {
-	console.log(document.getElementById('file-input').files[0]);
+	reader.readAsDataURL(document.getElementById('file-input').files[0])
 }
 
 window.onload = function() {
@@ -79,4 +81,10 @@ window.onload = function() {
           submit();
       }
   }
+
+	reader.addEventListener("load", function () {
+		console.log(reader.result);
+		document.getElementById('photo').setAttribute('src', reader.result);
+		photoExists = true;
+	}, false);
 }
