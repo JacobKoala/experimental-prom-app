@@ -33,6 +33,10 @@
 
   <h2>Photo</h2>
   <input type="file" accept="image/*" id="file-input" onchange="manualImageChange()">
+  <button type="button" onclick="changeDevice()">Get Camera</button>
+  <select id="cameraSelection">
+    <option></option>
+  </select>
   <div class="contentarea">
   <div class="camera">
     <video id="video">Video stream not available.</video>

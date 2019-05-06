@@ -75,6 +75,39 @@ function manualImageChange() {
 	reader.readAsDataURL(document.getElementById('file-input').files[0])
 }
 
+// from https://github.com/philnash/mediadevices-camera-selection/blob/master/app.js
+// see MIT Licence at for licence
+function gotDevices(mediaDevices) {
+	const select = document.getElementById("cameraSelection");
+
+  select.innerHTML = '';
+  select.appendChild(document.createElement('option'));
+  let count = 1;
+  mediaDevices.forEach(mediaDevice => {
+    if (mediaDevice.kind === 'videoinput') {
+      const option = document.createElement('option');
+      option.value = mediaDevice.deviceId;
+      const label = mediaDevice.label || `Camera ${count++}`;
+      const textNode = document.createTextNode(label);
+      option.appendChild(textNode);
+      select.appendChild(option);
+    }
+  });
+}
+
+function changeDevice() {
+	const video = document.getElementById('video');
+	console.log(document.getElementById('cameraSelection').value);
+	navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: document.getElementById('cameraSelection').value}}, audio:false})
+	.then(function(stream) {
+		video.srcObject = stream;
+		video.play();
+	})
+	.catch(function(err) {
+		console.log("An error occurred: " + err);
+	});
+}
+
 window.onload = function() {
   document.getElementById('ticketInput').onkeydown = function(event) {
       if (event.keyCode == 13) {
@@ -87,4 +120,6 @@ window.onload = function() {
 		document.getElementById('photo').setAttribute('src', reader.result);
 		photoExists = true;
 	}, false);
+
+	navigator.mediaDevices.enumerateDevices().then(gotDevices);
 }
