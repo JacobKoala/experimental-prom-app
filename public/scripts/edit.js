@@ -17,6 +17,7 @@ function createStudent(studentID, firstName, lastName, idPhoto, typedShirtSize, 
 		currentStudentTicketNumber = document.getElementById("ticketInput").value;
 		saveImage();
 	}).catch(function(error) {
+		alert('Error when adding student: ' + error)
 		console.error('Error when adding student', error)
 	});
 }
