@@ -33,8 +33,7 @@
 
   <h2>Photo</h2>
   <input type="file" accept="image/*" id="file-input" onchange="manualImageChange()">
-  <button type="button" onclick="changeDevice()">Get Camera</button>
-  <select id="cameraSelection">
+  <select id="cameraSelection" onchange="changeDevice()">
     <option></option>
   </select>
   <div class="contentarea">
