@@ -17,7 +17,11 @@ function createStudent(studentID, firstName, lastName, idPhoto, typedShirtSize, 
 		currentStudentTicketNumber = document.getElementById("ticketInput").value;
 		saveImage();
 	}).catch(function(error) {
-		alert('Error when adding student: ' + error)
+		if (error.code = "permission-denied") {
+			alert("Permission denied!\nYou must have authorization to use this app. If you believe this is a mistake, please contact Mrs. Patel.")
+		} else {
+			alert('Error when adding student: ' + error)
+		}
 		console.error('Error when adding student', error)
 	});
 }
