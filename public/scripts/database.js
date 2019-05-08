@@ -4,7 +4,6 @@ function getStudentByTicket(ticketNumber) {
 	firebase.firestore().collection("students").where("ticketNumber", "==", ticketNumber)
     .get()
     .then(function(querySnapshot) {
-				document.getElementById("ticketInput").value = "";
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             currentStudent = doc;
@@ -22,8 +21,14 @@ function getStudentByTicket(ticketNumber) {
 							document.getElementById("yesButton").style.backgroundColor = "white";
 						}
         });
+				loadImage();
     })
     .catch(function(error) {
+			if (error.code = "permission-denied") {
+				alert("Permission denied!\nYou must have authorization to use this app. If you believe this is a mistake, please contact Mrs. Patel.");
+			} else {
+				alert9("Error getting documents: " + error);
+			}
         console.log("Error getting documents: ", error);
     });
 }
@@ -59,6 +64,20 @@ function noShirt() {
 function retrieveStudent() {
 	var input = document.getElementById("ticketInput").value;
 	getStudentByTicket(parseInt(input));
+}
+
+function loadImage() {
+	storageRef.child(document.getElementById("ticketInput").value + ".jpg").getDownloadURL().then(function(url) {
+	  // `url` is the download URL for 'images/stars.jpg'
+
+	  // Or inserted into an <img> element:
+		console.log(url);
+	  var img = document.getElementById('imageSpace');
+	  img.src = url;
+		document.getElementById("ticketInput").value = "";
+	}).catch(function(error) {
+	  // Handle any errors
+	});
 }
 
 window.onload = function() {
