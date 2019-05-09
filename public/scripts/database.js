@@ -67,7 +67,7 @@ function retrieveStudent() {
 }
 
 function loadImage() {
-	storageRef.child(document.getElementById("ticketInput").value + ".jpg").getDownloadURL().then(function(url) {
+	storageRef.child(parseInt(document.getElementById("ticketInput").value, 10) + ".jpg").getDownloadURL().then(function(url) {
 	  // `url` is the download URL for 'images/stars.jpg'
 
 	  // Or inserted into an <img> element:
