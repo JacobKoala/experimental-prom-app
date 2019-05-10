@@ -53,7 +53,7 @@ function saveImage() {
         });
 				console.log(currentStudentId);
 				console.log(currentStudentTicketNumber);
-				var studentRef = storageRef.child(currentStudentTicketNumber + ".jpg");
+				var studentRef = storageRef.child(leadingZeros(parseInt(currentStudentTicketNumber, 10)) + ".jpg");
 				var file = document.getElementById('photo').src;
 				console.log(file);
 				if (photoExists) {
@@ -111,6 +111,18 @@ function changeDevice() {
 	.catch(function(err) {
 		console.log("An error occurred: " + err);
 	});
+}
+
+function leadingZeros(number) {
+	if (number < 10) {
+		return "000" + number;
+	} else if (number < 100) {
+		return "00" + number;
+	} else if (number < 1000) {
+		return "0" + number;
+	} else {
+		return number;
+	}
 }
 
 window.onload = function() {
