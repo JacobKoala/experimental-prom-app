@@ -24,7 +24,7 @@ function getStudentByTicket(ticketNumber) {
 				loadImage();
     })
     .catch(function(error) {
-			if (error.code = "permission-denied") {
+			if (error.code == "permission-denied") {
 				alert("Permission denied!\nYou must have authorization to use this app. If you believe this is a mistake, please contact Mrs. Patel.");
 			} else {
 				alert("Error getting documents: " + error);
