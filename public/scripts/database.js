@@ -9,7 +9,7 @@ function getStudentByTicket(ticketNumber) {
             currentStudent = doc;
 						affectedStudent = firebase.firestore().collection("students").doc(currentStudent.id)
             console.log(doc.id, " => ", doc.data());
-						document.getElementById("ticketNumber").innerHTML = doc.data().ticketNumber;
+						document.getElementById("ticketNumber").innerHTML = leadingZeros(doc.data().ticketNumber);
 						document.getElementById("firstName").innerHTML = doc.data().firstName;
 						document.getElementById("lastName").innerHTML = doc.data().lastName;
 						document.getElementById("shirtSize").innerHTML = doc.data().shirtSize;
