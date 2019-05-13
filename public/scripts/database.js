@@ -77,6 +77,18 @@ function loadImage() {
 		document.getElementById("ticketInput").value = "";
 	}).catch(function(error) {
 	  // Handle any errors
+		storageRef.child(parseInt(document.getElementById("ticketInput").value, 10) + ".jpg").getDownloadURL().then(function(url) {
+		  // `url` is the download URL for 'images/stars.jpg'
+
+		  // Or inserted into an <img> element:
+			console.log(url);
+		  var img = document.getElementById('imageSpace');
+		  img.src = url;
+			document.getElementById("ticketInput").value = "";
+		}).catch(function(error) {
+		  // Handle any errors
+			alert("Error getting photo: " + error);
+		});
 	});
 }
 
