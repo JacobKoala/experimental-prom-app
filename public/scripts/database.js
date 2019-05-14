@@ -108,6 +108,39 @@ function leadingZeros(number) {
 	}
 }
 
+function getStudentByLastName(lastName) {
+	firebase.firestore().collection("students").where("lastName", "==", lastName)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            currentStudent = doc;
+						affectedStudent = firebase.firestore().collection("students").doc(currentStudent.id)
+            console.log(doc.id, " => ", doc.data());
+						document.getElementById("ticketNumber").innerHTML = leadingZeros(doc.data().ticketNumber);
+						document.getElementById("firstName").innerHTML = doc.data().firstName;
+						document.getElementById("lastName").innerHTML = doc.data().lastName;
+						document.getElementById("shirtSize").innerHTML = doc.data().shirtSize;
+						if (doc.data().shirtCollected == true) {
+							document.getElementById("yesButton").style.backgroundColor = "blue";
+							document.getElementById("noButton").style.backgroundColor = "white";
+						} else {
+							document.getElementById("noButton").style.backgroundColor = "blue";
+							document.getElementById("yesButton").style.backgroundColor = "white";
+						}
+        });
+				loadImage();
+    })
+    .catch(function(error) {
+			if (error.code == "permission-denied") {
+				alert("Permission denied!\nYou must have authorization to use this app. If you believe this is a mistake, please contact Mrs. Patel.");
+			} else {
+				alert("Error getting documents: " + error);
+			}
+        console.log("Error getting documents: ", error);
+    });
+}
+
 window.onload = function() {
   document.getElementById('ticketInput').onkeydown = function(event) {
       var keyPressed = event.keyCode;
