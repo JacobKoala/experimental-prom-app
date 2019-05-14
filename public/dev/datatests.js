@@ -1,6 +1,7 @@
-ticketArray = [];
+var ticketArray = [];
 
 function logAllTickets(ticketNumber) {
+  ticketArray = [];
   firebase.firestore().collection("students")
   .get()
   .then(function(querySnapshot) {
@@ -11,7 +12,6 @@ function logAllTickets(ticketNumber) {
       } else {
         ticketArray[doc.data().ticketNumber] = 1;
       }
-
     })
   })
   .catch(function(error) {
@@ -24,7 +24,7 @@ function logAllTickets(ticketNumber) {
   });
 }
 
-function checkAllTickets() {
+function checkAllTickets(maximum) {
   for (i = 1; i < 10000; i++) {
     if (ticketArray[i] == 1) {
       console.log("Ticket #" + i + " exists only once.")
@@ -33,7 +33,7 @@ function checkAllTickets() {
       alert("Duplicate Ticket: " + ticketArray[i] + " instances of ticket #" + i);
     } else {
       console.log("Missing Ticket: ticket #" + i);
-      if (i < 100) {
+      if (i < maximum) {
         alert("Missing Ticket: ticket #" + i);
       }
     }
