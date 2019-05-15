@@ -41,15 +41,7 @@ function checkAllTickets(maximum) {
 }
 
 function logAllPhotos() {
-  storageRef.child(leadingZeros(parseInt(document.getElementById("ticketInput").value, 10)) + ".jpg").getDownloadURL().then(function(url) {
-	  // `url` is the download URL for 'images/stars.jpg'
-
-	  // Or inserted into an <img> element:
-		console.log(url);
-	  var img = document.getElementById('imageSpace');
-	  img.src = url;
-		document.getElementById("ticketInput").value = "";
-	}).catch(function(error) {
-		photoWithoutZero();
-	});
+  for (i = 1; i < 10000; i++) {
+    storageRef.child()
+  }
 }
