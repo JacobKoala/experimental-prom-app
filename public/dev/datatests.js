@@ -52,5 +52,6 @@ function logIndividualPhoto(ticketNumberString) {
     console.log("Successfully retrieved photo #" + ticketNumberString + " at url: " + url);
   }).catch(function(error) {
     console.log("Error retrieving photo #" + ticketNumberString + ": " + error);
+    alert("Error retrieving photo #" + ticketNumberString + ": " + error);
   });
 }
