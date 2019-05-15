@@ -20,6 +20,13 @@ function getStudentByTicket(ticketNumber) {
 							document.getElementById("noButton").style.backgroundColor = "blue";
 							document.getElementById("yesButton").style.backgroundColor = "white";
 						}
+						if (doc.data().photoID == 1) {
+							document.getElementById("yesButtonTwo").style.backgroundColor = "blue";
+							document.getElementById("noButtonTwo").style.backgroundColor = "white";
+						} else {
+							document.getElementById("noButtonTwo").style.backgroundColor = "blue";
+							document.getElementById("yesButtonTwo").style.backgroundColor = "white";
+						}
         });
 				loadImage();
     })
@@ -54,6 +61,34 @@ function noShirt() {
   .then(function() {
     document.getElementById("noButton").style.backgroundColor = "blue";
     document.getElementById("yesButton").style.backgroundColor = "white";
+    console.log("Document successfully updated!")
+  })
+  .catch(function(error) {
+    console.error("Error updating document: ", error);
+  });
+}
+
+function yesHere() {
+  return affectedStudent.update({
+    photoID: 1
+  })
+  .then(function() {
+    document.getElementById("yesButtonTwo").style.backgroundColor = "blue";
+    document.getElementById("noButtonTwo").style.backgroundColor = "white";
+    console.log("Document successfully updated!")
+  })
+  .catch(function(error) {
+    console.error("Error updating document: ", error);
+  });
+}
+
+function noHere() {
+  return affectedStudent.update({
+    photoID: 0
+  })
+  .then(function() {
+    document.getElementById("noButtonTwo").style.backgroundColor = "blue";
+    document.getElementById("yesButtonTwo").style.backgroundColor = "white";
     console.log("Document successfully updated!")
   })
   .catch(function(error) {
@@ -127,6 +162,13 @@ function getStudentByLastName(lastName) {
 						} else {
 							document.getElementById("noButton").style.backgroundColor = "blue";
 							document.getElementById("yesButton").style.backgroundColor = "white";
+						}
+						if (doc.data().photoID == 1) {
+							document.getElementById("yesButtonTwo").style.backgroundColor = "blue";
+							document.getElementById("noButtonTwo").style.backgroundColor = "white";
+						} else {
+							document.getElementById("noButtonTwo").style.backgroundColor = "blue";
+							document.getElementById("yesButtonTwo").style.backgroundColor = "white";
 						}
         });
 				loadImage();
