@@ -97,6 +97,15 @@ function noHere() {
 }
 
 function retrieveStudent() {
+	document.getElementById("ticketNumber").innerHTML = "";
+	document.getElementById("firstName").innerHTML = "";
+	document.getElementById("lastName").innerHTML = "";
+	document.getElementById("shirtSize").innerHTML = "";
+	document.getElementById("noButton").style.backgroundColor = "white";
+	document.getElementById("yesButton").style.backgroundColor = "white";
+	document.getElementById("noButtonTwo").style.backgroundColor = "white";
+	document.getElementById("yesButtonTwo").style.backgroundColor = "white";
+	document.getElementById('imageSpace').setAttribute('src', "");
 	var input = document.getElementById("ticketInput").value;
 	getStudentByTicket(parseInt(input));
 }
