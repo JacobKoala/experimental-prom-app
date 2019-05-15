@@ -40,8 +40,17 @@ function checkAllTickets(maximum) {
   }
 }
 
-function logAllPhotos() {
-  for (i = 1; i < 10000; i++) {
-    storageRef.child()
+function logAllPhotos(maximum) {
+  for (i = 1; i <= maximum; i++) {
+    var ticketString = leadingZeros(i);
+    logIndividualPhoto(ticketString);
   }
+}
+
+function logIndividualPhoto(ticketNumberString) {
+  storageRef.child(ticketNumberString + ".jpg").getDownloadURL().then(function(url) {
+    console.log("Successfully retrieved photo #" + ticketNumberString + " at url: " + url);
+  }).catch(function(error) {
+    console.log("Error retrieving photo #" + ticketNumberString + ": " + error);
+  });
 }
