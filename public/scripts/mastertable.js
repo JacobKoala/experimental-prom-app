@@ -1,19 +1,47 @@
 function generateTable() {
-  firebase.firestore().collection("students").orderBy("ticketNumber")
+  firebase.firestore().collection("students").orderBy("ticketNumber", "desc")
   .get()
   .then(function(querySnapshot) {
-    var content = '';
+    var table = document.getElementById("mastertable");
     querySnapshot.forEach(function(doc) {
       console.log(doc.id, "=>", doc.data());
+      var row = table.insertRow(1);
       var data = doc.data();
-      content += '<tr>';
-      content += '<td>' + leadingZeros(data.ticketNumber) + '</td>';
-      content += '<td>' + data.firstName + ' ' + data.lasttName + '</td>';
-      content += '<td>' + data.shirtSize + '</td>';
-      content += '<td>' + data.checkedIn + '</td>';
-      content += '<td>' + data.shirtCollected + '</td>';
-      content += '</tr>';
+
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+
+      cell1.innerHTML = leadingZeros(data.ticketNumber);
+      cell2.innerHTML = data.firstName + ' ' + data.lastName;
+      cell3.innerHTML = '<td>' + data.shirtSize;
+      cell4.innerHTML = '<td>' + checkedIn(data);
+      cell5.innerHTML = '<td>' + data.shirtCollected;
+      cell6.innerHTML = getDateString(data.timestamp);
     });
-    document.getElementById("mastertable").append(content);
   })
 }
+
+function checkedIn(data) {
+  if (data.PhotoID == 1) {
+    return true;
+  } else if (data.photoID == 0) {
+    return false;
+  } else {
+    return undefined;
+  }
+}
+
+function getDateString(timestamp) {
+  var dateAtTimestamp = new Date(timestamp);
+  var dateString = dateAtTimestamp.toLocaleDatestring(undefined, {
+    day: 'numeric',
+    month: 'short'
+  })
+  return dateString;
+}
+
+generateTable();
