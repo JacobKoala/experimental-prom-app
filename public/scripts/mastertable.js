@@ -1,5 +1,5 @@
 function generateTable() {
-  firebase.firestore().collection("students").orderBy("ticketNumber", "desc")
+  firebase.firestore().collection("students").orderBy("ticketNumber", "desc").orderBy("timestamp", "asc")
   .get()
   .then(function(querySnapshot) {
     var table = document.getElementById("mastertable");
@@ -26,6 +26,39 @@ function generateTable() {
       timestampCell.innerHTML = getDateString(data.timestamp);
     });
   })
+  .catch(function(error) {
+    firebase.firestore().collection("students").orderBy("ticketNumber", "desc")
+    .get()
+    .then(function(querySnapshot) {
+      var table = document.getElementById("mastertable");
+      querySnapshot.forEach(function(doc) {
+        console.log(doc.id, "=>", doc.data());
+        var row = table.insertRow(1);
+        var data = doc.data();
+
+        var ticketCell = row.insertCell(0);
+        var nameCell = row.insertCell(1);
+        var photoCell;
+        var shirtCell = row.insertCell(2);
+        var hereCell = row.insertCell(3);
+        var collectedCell = row.insertCell(4);
+        var timestampCell = row.insertCell(5);
+
+        ticketCell.innerHTML = leadingZeros(data.ticketNumber);
+        nameCell.innerHTML = data.firstName + ' ' + data.lastName;
+        shirtCell.innerHTML = data.shirtSize;
+        hereCell.innerHTML = checkedIn(data);
+        hereCell.style.backgroundColor = colorCode(checkedIn(data));
+        collectedCell.innerHTML = data.shirtCollected;
+        collectedCell.style.backgroundColor = colorCode(data.shirtCollected);
+        timestampCell.innerHTML = getDateString(data.timestamp);
+      });
+    })
+    .catch(function(error) {
+      console.log("Error: " + error);
+      alert("Error: " + error);
+    });
+  });
 }
 
 // This function converts the integer photoID to a boolean variable.
