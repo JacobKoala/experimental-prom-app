@@ -46,15 +46,7 @@ function getStudentByTicket(ticketNumber) {
 						readableArray[i] = duplicateArray[i].data();
 					}
 					console.log(readableArray);
-					duplicateArray.sort(function(a, b) {
-						if (a.data().timestamp > b.data().timestamp) {
-							return -1;
-						} else if (a.data().timestamp < b.data().timestamp) {
-							return 1;
-						} else {
-							return 0;
-						}
-					});
+					duplicateArray.sort(function(a, b) {return b.data().timestamp - a.data().timestamp});
 					// console.log(duplicateArray);
 					var readableArray = [];
 					for (i = 0; i < duplicateArray.length; i++) {
