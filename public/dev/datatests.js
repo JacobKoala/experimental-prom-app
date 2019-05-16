@@ -42,16 +42,21 @@ function checkAllTickets(maximum) {
 
 function logAllPhotos(maximum) {
   for (i = 1; i <= maximum; i++) {
+    var ticketInteger = i;
     var ticketString = leadingZeros(i);
-    logIndividualPhoto(ticketString);
+    logIndividualPhoto(ticketInteger, ticketString);
   }
 }
 
-function logIndividualPhoto(ticketNumberString) {
+function logIndividualPhoto(ticketNumberInteger, ticketNumberString) {
   storageRef.child(ticketNumberString + ".jpg").getDownloadURL().then(function(url) {
     console.log("Successfully retrieved photo #" + ticketNumberString + " at url: " + url);
   }).catch(function(error) {
-    console.error("Error retrieving photo #" + ticketNumberString + ": " + error);
-    alert("Error retrieving photo #" + ticketNumberString + ": " + error);
+    storageRef.child(ticketNumberInteger + ".jpg").getDownloadURL().then(function(url) {
+      console.error("Photo #" + ticketNumberString + " is missing leading zeros, but it can be found at url: " + url);
+    }).catch(function(error) {
+      console.error("Error retrieving photo #" + ticketNumberString + ": " + error);
+      alert("Error retrieving photo #" + ticketNumberString + ": " + error);
+    });
   });
 }
