@@ -29,10 +29,10 @@ function checkAllTickets(maximum) {
     if (ticketArray[i] == 1) {
       console.log("Ticket #" + i + " exists only once.")
     } else if (ticketArray[i] > 1) {
-      console.log("Duplicate Ticket: " + ticketArray[i] + " instances of ticket #" + i);
+      console.error("Duplicate Ticket: " + ticketArray[i] + " instances of ticket #" + i);
       alert("Duplicate Ticket: " + ticketArray[i] + " instances of ticket #" + i);
     } else {
-      console.log("Missing Ticket: ticket #" + i);
+      console.error("Missing Ticket: ticket #" + i);
       if (i < maximum) {
         alert("Missing Ticket: ticket #" + i);
       }
@@ -51,7 +51,7 @@ function logIndividualPhoto(ticketNumberString) {
   storageRef.child(ticketNumberString + ".jpg").getDownloadURL().then(function(url) {
     console.log("Successfully retrieved photo #" + ticketNumberString + " at url: " + url);
   }).catch(function(error) {
-    console.log("Error retrieving photo #" + ticketNumberString + ": " + error);
+    console.error("Error retrieving photo #" + ticketNumberString + ": " + error);
     alert("Error retrieving photo #" + ticketNumberString + ": " + error);
   });
 }
