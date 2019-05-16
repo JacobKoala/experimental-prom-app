@@ -36,12 +36,7 @@ function checkedIn(data) {
 }
 
 function getDateString(timestamp) {
-  var dateAtTimestamp = new Date(timestamp);
-  var dateString = dateAtTimestamp.toLocaleDatestring(undefined, {
-    day: 'numeric',
-    month: 'short'
-  })
-  return dateString;
+  return timestamp;
 }
 
 generateTable();
