@@ -48,6 +48,26 @@ function eachDoc(doc) {
   timestampCell.innerHTML = getDateString(data.timestamp);
 }
 
+function listenTable() {
+  firebase.firestore().collection("students")
+  .onSnapshot(function(snapshot) {
+    snapshot.docChanges().forEach(function(change) {
+      if (change.type === "added") {
+          console.log("New document: ", change.doc.data());
+          alert("A document has been added.")
+      }
+      if (change.type === "modified") {
+          console.log("Modified document: ", change.doc.data());
+
+      }
+      if (change.type === "removed") {
+          console.log("Removed document: ", change.doc.data());
+          alert("A document has been removed.");
+      }
+    });
+  });
+}
+
 // This function converts the integer photoID to a boolean variable.
 function checkedIn(data) {
   if (data.photoID == 1) {
@@ -74,3 +94,4 @@ function colorCode(value) {
 }
 
 generateTable();
+// listenTable();
