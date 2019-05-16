@@ -8,21 +8,21 @@ function generateTable() {
       var row = table.insertRow(1);
       var data = doc.data();
 
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
-      var cell6 = row.insertCell(5);
+      var ticketCell = row.insertCell(0);
+      var nameCell = row.insertCell(1);
+      var shirtCell = row.insertCell(2);
+      var hereCell = row.insertCell(3);
+      var collectedCell = row.insertCell(4);
+      var timestampCell = row.insertCell(5);
 
-      cell1.innerHTML = leadingZeros(data.ticketNumber);
-      cell2.innerHTML = data.firstName + ' ' + data.lastName;
-      cell3.innerHTML = data.shirtSize;
-      cell4.innerHTML = checkedIn(data);
-      cell4.style.backgroundColor = colorCode(checkedIn(data));
-      cell5.innerHTML = data.shirtCollected;
-      cell5.style.backgroundColor = colorCode(data.shirtCollected);
-      cell6.innerHTML = getDateString(data.timestamp);
+      ticketCell.innerHTML = leadingZeros(data.ticketNumber);
+      nameCell.innerHTML = data.firstName + ' ' + data.lastName;
+      shirtCell.innerHTML = data.shirtSize;
+      hereCell.innerHTML = checkedIn(data);
+      hereCell.style.backgroundColor = colorCode(checkedIn(data));
+      collectedCell.innerHTML = data.shirtCollected;
+      collectedCell.style.backgroundColor = colorCode(data.shirtCollected);
+      timestampCell.innerHTML = getDateString(data.timestamp);
     });
   })
 }
