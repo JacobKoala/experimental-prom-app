@@ -10,6 +10,7 @@ function generateTable() {
     });
   })
   .catch(function(error) {
+    console.error("Error retrieving table: ", error);
     firebase.firestore().collection("students").orderBy("ticketNumber", "desc")
     .get()
     .then(function(querySnapshot) {
@@ -93,5 +94,13 @@ function colorCode(value) {
   }
 }
 
-generateTable();
+function confirmLoad() {
+  if (confirm("Loading this table can only be done about 25 times per day (unconfirmed number). Are you sure you want to load the table now?")) {
+    generateTable();
+  }
+}
+
+
+confirmLoad();
+
 // listenTable();
