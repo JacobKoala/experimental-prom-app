@@ -24,8 +24,8 @@ function logAllTickets(ticketNumber) {
   });
 }
 
-function checkAllTickets(maximum) {
-  for (i = 1; i < 10000; i++) {
+function checkAllTickets(start = 1, maximum = 1000) {
+  for (i = start; i < 10000; i++) {
     if (ticketArray[i] == 1) {
       console.log("Ticket #" + i + " exists only once.")
     } else if (ticketArray[i] > 1) {
@@ -40,8 +40,8 @@ function checkAllTickets(maximum) {
   }
 }
 
-function logAllPhotos(maximum) {
-  for (i = 1; i <= maximum; i++) {
+function logAllPhotos(start = 1, maximum = 1000) {
+  for (i = start; i <= maximum; i++) {
     var ticketInteger = i;
     var ticketString = leadingZeros(i);
     logIndividualPhoto(ticketInteger, ticketString);
