@@ -1,4 +1,5 @@
 var currentStudent;
+duplicateArray = [];
 
 function getStudentByTicket(ticketNumber) {
 	firebase.firestore().collection("students").where("ticketNumber", "==", ticketNumber)
@@ -30,8 +31,62 @@ function getStudentByTicket(ticketNumber) {
 								document.getElementById("yesButtonTwo").style.backgroundColor = "white";
 							}
 	        });
+					loadImage();
+				} else if (querySnapshot.docs.length == 0) {
+					console.log("That ticket number does not exist!");
+					alert("That ticket number does not exist!");
+				} else {
+					duplicateArray = [];
+					querySnapshot.forEach(function(doc) {
+						duplicateArray.push(doc);
+					});
+					// console.log(duplicateArray);
+					var readableArray = [];
+					for (i = 0; i < duplicateArray.length; i++) {
+						readableArray[i] = duplicateArray[i].data();
+					}
+					console.log(readableArray);
+					duplicateArray.sort(function(a, b) {
+						if (a.data().timestamp > b.data().timestamp) {
+							return -1;
+						} else if (a.data().timestamp < b.data().timestamp) {
+							return 1;
+						} else {
+							return 0;
+						}
+					});
+					// console.log(duplicateArray);
+					var readableArray = [];
+					for (i = 0; i < duplicateArray.length; i++) {
+						readableArray[i] = duplicateArray[i].data();
+					}
+					console.log(readableArray);
+					var displayedStudent = duplicateArray[0];
+
+					affectedStudent = firebase.firestore().collection("students").doc(displayedStudent.id)
+					console.log(displayedStudent.id, " => ", displayedStudent.data());
+					document.getElementById("ticketNumber").innerHTML = leadingZeros(displayedStudent.data().ticketNumber);
+					document.getElementById("firstName").innerHTML = displayedStudent.data().firstName;
+					document.getElementById("lastName").innerHTML = displayedStudent.data().lastName;
+					document.getElementById("shirtSize").innerHTML = displayedStudent.data().shirtSize;
+					if (displayedStudent.data().shirtCollected == true) {
+						document.getElementById("yesButton").style.backgroundColor = "blue";
+						document.getElementById("noButton").style.backgroundColor = "white";
+					} else {
+						document.getElementById("noButton").style.backgroundColor = "blue";
+						document.getElementById("yesButton").style.backgroundColor = "white";
+					}
+					if (displayedStudent.data().photoID == 1) {
+						document.getElementById("yesButtonTwo").style.backgroundColor = "blue";
+						document.getElementById("noButtonTwo").style.backgroundColor = "white";
+					} else {
+						document.getElementById("noButtonTwo").style.backgroundColor = "blue";
+						document.getElementById("yesButtonTwo").style.backgroundColor = "white";
+					}
+
+					loadImage();
 				}
-				loadImage();
+
     })
     .catch(function(error) {
 			if (error.code == "permission-denied") {
