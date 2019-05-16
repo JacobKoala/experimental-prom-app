@@ -95,7 +95,7 @@ function colorCode(value) {
 }
 
 function confirmLoad() {
-  if (confirm("Loading this table can only be done about 25 times per day (unconfirmed number). Are you sure you want to load the table now?")) {
+  if (confirm("Loading this table can only be done about 25 times per day (unconfirmed number). If the quota is exceeded, other, more critical, functions may stop working as well. Are you sure you want to load the table now?")) {
     generateTable();
   }
 }
