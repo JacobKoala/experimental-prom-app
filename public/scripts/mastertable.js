@@ -17,27 +17,39 @@ function generateTable() {
 
       cell1.innerHTML = leadingZeros(data.ticketNumber);
       cell2.innerHTML = data.firstName + ' ' + data.lastName;
-      cell3.innerHTML = '<td>' + data.shirtSize;
-      cell4.innerHTML = '<td>' + checkedIn(data);
-      cell5.innerHTML = '<td>' + data.shirtCollected;
+      cell3.innerHTML = data.shirtSize;
+      cell4.innerHTML = checkedIn(data);
+      cell4.style.backgroundColor = colorCode(checkedIn(data));
+      cell5.innerHTML = data.shirtCollected;
+      cell5.style.backgroundColor = colorCode(data.shirtCollected);
       cell6.innerHTML = getDateString(data.timestamp);
     });
   })
 }
 
+// This function converts the integer photoID to a boolean variable.
 function checkedIn(data) {
-  if (data.PhotoID == 1) {
+  if (data.photoID == 1) {
     return true;
   } else if (data.photoID == 0) {
     return false;
   } else {
-    return undefined;
+    return data.photoID;
   }
 }
 
+// This function returns a string for an integer representing the number of seonds since 1970.
 function getDateString(timestamp) {
   var myDate = new Date(timestamp);
   return myDate.toLocaleString();
+}
+
+function colorCode(value) {
+  if (value == true) {
+    return "green";
+  } else if (value == false) {
+    return "red";
+  }
 }
 
 generateTable();
