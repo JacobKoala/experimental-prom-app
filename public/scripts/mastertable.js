@@ -10,6 +10,7 @@ function generateTable() {
 
       var ticketCell = row.insertCell(0);
       var nameCell = row.insertCell(1);
+      var photoCell;
       var shirtCell = row.insertCell(2);
       var hereCell = row.insertCell(3);
       var collectedCell = row.insertCell(4);
