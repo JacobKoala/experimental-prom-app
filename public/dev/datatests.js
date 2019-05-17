@@ -1,6 +1,6 @@
 var ticketArray = [];
 
-function logAllTickets(ticketNumber) {
+function logAllTickets() {
   ticketArray = [];
   firebase.firestore().collection("students")
   .get()
