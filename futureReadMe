@@ -1,2 +1,3 @@
-Although it is too late to change this year, next year the image names should be based on internal student id (the one from Google) rather than the ticket number assigned to each student.
+Although it is too late to change this year, next year the image names should be based on internal id (the one from Google) rather than the ticket number assigned to each student.
 Sometimes I notice several errors in a row, so maybe logging which user submits a student would help us find people who enter errors frequently, and then we could let those people know so that they can improve.
+It would be good if there was a section of the app that made it easy to see which tickets were incorrect or missing. Something more user-friendly than /dev/ would be ideal.
